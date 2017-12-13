@@ -31,22 +31,22 @@ public interface InformationEstimatorInterface{
 
 public class TestCase {
     public static void main(String[] args) {
-	try {
-	    FrequencerInterface  myObject;
-	    int freq;
-	    System.out.println("checking s4.b173325.Frequencer");
-	    myObject = new s4.b173325.Frequencer();
-	    myObject.setSpace("Hi Ho Hi Ho".getBytes());
-	    myObject.setTarget("H".getBytes());
-	    freq = myObject.frequency();
-	    System.out.print("\"H\" in \"Hi Ho Hi Ho\" appears "+freq+" times. ");
-	    if(4 == freq) { System.out.println("OK"); } else {System.out.println("WRONG"); }
-    }
-    catch(Exception e) {
-        System.out.println("Exception occurred: STOP");
-    }
+		try {
+			FrequencerInterface  myObject;
+			int freq;
+			System.out.println("checking s4.b173325.Frequencer");
+			myObject = new s4.b173325.Frequencer();
+			myObject.setSpace("Hi Ho Hi Ho".getBytes());
+			myObject.setTarget("H".getBytes());
+			freq = myObject.frequency();
+			System.out.print("\"H\" in \"Hi Ho Hi Ho\" appears "+freq+" times. ");
+			if(4 == freq) { System.out.println("OK"); } else {System.out.println("WRONG"); }
+		}
+		catch(Exception e) {
+			System.out.println("Exception occurred: STOP");
+		}
         
-        // ターゲットが設定されていない
+        // TARGET is not set
         try {
             FrequencerInterface  myObject;
             int freq;
@@ -61,7 +61,7 @@ public class TestCase {
             System.out.println("Exception occurred: STOP");
         }
         
-        // ターゲットの長さが0
+        // TARGET's length is zero
         try {
             FrequencerInterface  myObject;
             int freq;
@@ -77,7 +77,7 @@ public class TestCase {
             System.out.println("Exception occurred: STOP");
         }
         
-        // スペースが設定されていない
+        // SPACE is not set
         try {
             FrequencerInterface  myObject;
             int freq;
@@ -92,7 +92,7 @@ public class TestCase {
             System.out.println("Exception occurred: STOP");
         }
         
-        // スペースの長さが0
+        // Space's length is zero
         try {
             FrequencerInterface  myObject;
             int freq;
@@ -108,34 +108,36 @@ public class TestCase {
             System.out.println("Exception occurred: STOP");
         }
 
-	try {
-	    InformationEstimatorInterface myObject;
-	    double value;
-	    System.out.println("checking s4.b173325.InformationEstimator");
-	    myObject = new s4.b173325.InformationEstimator();
-	    myObject.setSpace("3210321001230123".getBytes());
+		
+		
+		try {
+			InformationEstimatorInterface myObject;
+			double value;
+			System.out.println("checking s4.b173325.InformationEstimator");
+			myObject = new s4.b173325.InformationEstimator();
+			myObject.setSpace("3210321001230123".getBytes());
+			
+			myObject.setTarget("0".getBytes());
+			value = myObject.estimation();
+			System.out.println(">0 "+value);
+			
+			myObject.setTarget("01".getBytes());
+			value = myObject.estimation();
+			System.out.println(">01 "+value);
+			
+			myObject.setTarget("0123".getBytes());
+			value = myObject.estimation();
+			System.out.println(">0123 "+value);
+			
+			myObject.setTarget("00".getBytes());
+			value = myObject.estimation();
+			System.out.println(">00 "+value);
+		}
+		catch(Exception e) {
+			System.out.println("Exception occurred: STOP");
+		}
         
-	    myObject.setTarget("0".getBytes());
-	    value = myObject.estimation();
-	    System.out.println(">0 "+value);
-        
-	    myObject.setTarget("01".getBytes());
-	    value = myObject.estimation();
-	    System.out.println(">01 "+value);
-        
-	    myObject.setTarget("0123".getBytes());
-	    value = myObject.estimation();
-	    System.out.println(">0123 "+value);
-        
-	    myObject.setTarget("00".getBytes());
-	    value = myObject.estimation();
-	    System.out.println(">00 "+value);
-	}
-	catch(Exception e) {
-	    System.out.println("Exception occurred: STOP");
-	}
-        
-        // ターゲットが設定されていない
+        // TARGET is not set
         try {
             InformationEstimatorInterface myObject;
             double value;
@@ -150,7 +152,7 @@ public class TestCase {
             System.out.println("Exception occurred: STOP");
         }
         
-        // ターゲットの長さが0
+        // TARGET's length is zero
         try {
             InformationEstimatorInterface myObject;
             double value;
