@@ -162,6 +162,34 @@ public class TestCase {
             System.out.println("Exception occurred: STOP");
         }
 
+        // SPACE is not set
+        try {
+            InformationEstimatorInterface myObject;
+            double value;
+            myObject = new s4.b173325.InformationEstimator();
+            
+            myObject.setTarget("0".getBytes());
+            value = myObject.estimation();
+            if(Double.MAX_VALUE == value) { System.out.println("OK"); } else {System.out.println("WRONG"); }
+        }
+        catch(Exception e) {
+            System.out.println("Exception occurred: STOP");
+        }
+        
+        // SPACE's length is zero
+        try {
+            InformationEstimatorInterface myObject;
+            double value;
+            myObject = new s4.b173325.InformationEstimator();
+            myObject.setSpace("".getBytes());
+            
+            myObject.setTarget("0".getBytes());
+            value = myObject.estimation();
+            if(Double.MAX_VALUE == value) { System.out.println("OK"); } else {System.out.println("WRONG"); }
+        }
+        catch(Exception e) {
+            System.out.println("Exception occurred: STOP");
+        }
     }
 }	    
 	    

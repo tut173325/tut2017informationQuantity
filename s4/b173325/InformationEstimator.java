@@ -43,13 +43,12 @@ public class InformationEstimator implements InformationEstimatorInterface{
     public double estimation(){
         double value = Double.MAX_VALUE; // value = mininimum of each "value1".
         
-        if(myTarget == null)
+        if(myTarget == null || myTarget.length == 0)
         {
             value = 0.0;
         }
-        else if(myTarget.length == 0)
+        else if(mySpace == null || mySpace.length == 0)
         {
-            value = 0.0;
         }
         else
         {
