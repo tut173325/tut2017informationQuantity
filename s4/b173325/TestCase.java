@@ -44,6 +44,7 @@ public class TestCase {
 		}
 		catch(Exception e) {
 			System.out.println("Exception occurred: STOP");
+            System.out.println(e);
 		}
         
         // TARGET is not set
