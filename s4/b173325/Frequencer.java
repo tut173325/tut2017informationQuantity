@@ -15,7 +15,8 @@ interface FrequencerInterface {     // This interface provides the design for fr
 */
 
 
-public class Frequencer implements FrequencerInterface{
+public class Frequencer implements FrequencerInterface
+{
     // Code to Test, *warning: This code  contains intentional problem*
     byte [] myTarget;
     byte [] mySpace;
@@ -41,7 +42,8 @@ public class Frequencer implements FrequencerInterface{
         }
     }
     
-    private int suffixCompare(int i, int j) {
+    private int suffixCompare(int i, int j)
+    {
         // comparing two suffixes by dictionary order.
         // It should be called from setSpace or some method to create suffix. // It should not be used for searching indexes.
         // i and j denoetes suffix_i, and suffix_j
@@ -68,7 +70,8 @@ public class Frequencer implements FrequencerInterface{
         
     }
             
-    public void setSpace(byte []space) {
+    public void setSpace(byte []space)
+    {
         mySpace = space;
         if(mySpace.length>0) spaceReady = true;
         suffixArray = new int[space.length];
@@ -96,7 +99,8 @@ public class Frequencer implements FrequencerInterface{
         printSuffixArray();
     }
     
-    private int targetCompare(int i, int start, int end) {
+    private int targetCompare(int i, int start, int end)
+    {
         // comparing suffix_i and target_j_end by dictonary order with limitation of length;
         // if the beginning of suffix_i matches target_i_end, and suffix is longer than target it returns 0;
         // if suffix_i > target_i_end it return 1;
@@ -118,7 +122,8 @@ public class Frequencer implements FrequencerInterface{
     }
     
     
-    byte [] subBytes(byte [] x, int start, int end) {
+    byte [] subBytes(byte [] x, int start, int end)
+    {
         // corresponding to substring of String for  byte[] ,
         // It is not implement in class library because internal structure of byte[] requires copy.
         byte [] result = new byte[end - start];
@@ -126,7 +131,8 @@ public class Frequencer implements FrequencerInterface{
         return result;
     }
     
-    private int subByteStartIndex(int start, int end) {
+    private int subByteStartIndex(int start, int end)
+    {
         // It returns the index of the first suffix which is equal or greater than subBytes;
         // not implemented yet;
         // For "Ho", it will return 5 for "Hi Ho Hi Ho".
@@ -141,7 +147,8 @@ public class Frequencer implements FrequencerInterface{
         return -1;
     }
     
-    private int subByteEndIndex(int start, int end) {
+    private int subByteEndIndex(int start, int end)
+    {
         // It returns the next index of the first suffix which is greater than subBytes;
         // not implemented yet
         // For "Ho", it will return 7 for "Hi Ho Hi Ho".
@@ -156,7 +163,8 @@ public class Frequencer implements FrequencerInterface{
         return -1;
     }
     
-    public int subByteFrequency(int start, int end) {
+    public int subByteFrequency(int start, int end)
+    {
         /* This method could be defined as follows though it is slow.
          int spaceLength = mySpace.length;
          int count = 0;
@@ -165,7 +173,7 @@ public class Frequencer implements FrequencerInterface{
          for(int i = 0; i< (end - start); i++) {
          if(myTarget[start+i] != mySpace[offset+i]) { abort = true; break; } }
          if(abort == false) { count++; } }
-         */
+        */
         int first = subByteStartIndex(start,end);
         int last1 = subByteEndIndex(start, end);
         
@@ -176,13 +184,15 @@ public class Frequencer implements FrequencerInterface{
         return last1 - first;
     }
     
-    public void setTarget(byte [] target) {
+    public void setTarget(byte [] target)
+    {
         myTarget = target;
         if(myTarget.length>0) targetReady = true;
     }
     
     
-    public int frequency() {
+    public int frequency()
+    {
         /*
         int count = 0;
         
@@ -206,14 +216,15 @@ public class Frequencer implements FrequencerInterface{
         }
         
         return count;
-         */
+        */
         
         if(targetReady == false) return -1;
         if(spaceReady == false) return 0;
         return subByteFrequency(0, myTarget.length);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         Frequencer frequencerObject;
         try {
             frequencerObject = new Frequencer();
