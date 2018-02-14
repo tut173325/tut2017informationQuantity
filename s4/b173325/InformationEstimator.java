@@ -18,6 +18,8 @@ public interface InformationEstimatorInterface{
 public class InformationEstimator implements InformationEstimatorInterface
 {
     // Code to tet, *warning: This code condtains intentional problem*
+	boolean targetReady = false;
+    boolean spaceReady = false;
     byte [] myTarget; // data to compute its information quantity
     byte [] mySpace;  // Sample space to compute the probability
     FrequencerInterface myFrequencer;  // Object for counting frequency
@@ -43,6 +45,7 @@ public class InformationEstimator implements InformationEstimatorInterface
     public void setTarget(byte [] target)
     {
         myTarget = target;
+		if(target.length > 0) targetReady = true;
     }
     
     public void setSpace(byte []space)
@@ -50,10 +53,56 @@ public class InformationEstimator implements InformationEstimatorInterface
         myFrequencer = new Frequencer();
         mySpace = space;
         myFrequencer.setSpace(space);
+		spaceReady = true;
     }
 
     public double estimation()
     {
+		
+		if(targetReady == false) return (double) 0.0;
+		if(spaceReady == false) return Double.MAX_VALUE;
+
+		myFrequencer.setTarget(myTarget);
+
+		double [] prefixEstimation = new double[myTarget.length + 1];
+
+		prefixEstimation[0] = (double) 0.0; //IE("") = 0.0; 
+
+		for(int n = 1; n <= myTarget.length; n++) 
+        {
+			// target = "abcdef..", n = 4 for example, subByte(0, 4) = "abcd",
+			// IE("abcd") = min( IE("")+iq(#"abcd"),
+			//                   IE("a") + iq(#"bcd"), 
+			//                   IE("ab")+iq(#"cd"), 
+			//                   IE("abc")+iq(#"d") )
+			// prefixEstimation[0] = IE(""), subByte(0,4) = "abcd", 
+			// prefixEstimation[1] = IE("a");  subByte(1,4)= "bcd",
+			// prefixEstimation[2] = IE("ab");  subByte(2,4)= "cd",
+			// prefixEstimation[3] = IE("abc");  subByte(3,4)= "d",	
+			// prefixEstimation[4] = IE("abcd");
+			//
+			double value = Double.MAX_VALUE;
+			for(int start = n - 1; start >= 0; start--) 
+			{
+				int freq = myFrequencer.subByteFrequency(start, n);
+				if(freq != 0) 
+				{
+					// update "value" if it is needed.
+					double value1 = prefixEstimation[start] + iq(freq);
+					if(value > value1) value = value1;
+				} 
+				else 
+				{
+					// here freq ==0. This means iq(freq) is infinite.
+					// freq is monotonically descreasing in this loop.
+					// Now the current "value" is the minimum.
+					break; 
+				}
+			}
+			prefixEstimation[n]=value;
+		}
+		return prefixEstimation[myTarget.length];
+	/*
         double value = Double.MAX_VALUE; // value = mininimum of each "value1".
         
         if(myTarget == null || myTarget.length == 0)
@@ -109,7 +158,8 @@ public class InformationEstimator implements InformationEstimatorInterface
             }
         }
 	return value;
-    }
+	*/
+	}
 
     public static void main(String[] args)
     {

@@ -129,68 +129,15 @@ public class TestCase {
 			myObject.setTarget("00".getBytes());
 			value = myObject.estimation();
 			System.out.println(">00 "+value);
+
+            myObject.setTarget("4".getBytes());
+            value = myObject.estimation();
+            System.out.println(">4 "+value);
 		}
 		catch(Exception e) {
 			System.out.println("Exception occurred: STOP");
+            System.out.println(e);
 		}
-        
-        // TARGET is not set
-        try {
-            InformationEstimatorInterface myObject;
-            double value;
-            myObject = new s4.b173325.InformationEstimator();
-            myObject.setSpace("3210321001230123".getBytes());
-            
-            value = myObject.estimation();
-            if(0.0 == value) { System.out.println("OK"); } else {System.out.println("WRONG"); }
-        }
-        catch(Exception e) {
-            System.out.println("Exception occurred: STOP");
-        }
-        
-        // TARGET's length is zero
-        try {
-            InformationEstimatorInterface myObject;
-            double value;
-            myObject = new s4.b173325.InformationEstimator();
-            myObject.setSpace("3210321001230123".getBytes());
-            
-            myObject.setTarget("".getBytes());
-            value = myObject.estimation();
-            if(0.0 == value) { System.out.println("OK"); } else {System.out.println("WRONG"); }
-        }
-        catch(Exception e) {
-            System.out.println("Exception occurred: STOP");
-        }
-
-        // SPACE is not set
-        try {
-            InformationEstimatorInterface myObject;
-            double value;
-            myObject = new s4.b173325.InformationEstimator();
-            
-            myObject.setTarget("0".getBytes());
-            value = myObject.estimation();
-            if(Double.MAX_VALUE == value) { System.out.println("OK"); } else {System.out.println("WRONG"); }
-        }
-        catch(Exception e) {
-            System.out.println("Exception occurred: STOP");
-        }
-        
-        // SPACE's length is zero
-        try {
-            InformationEstimatorInterface myObject;
-            double value;
-            myObject = new s4.b173325.InformationEstimator();
-            myObject.setSpace("".getBytes());
-            
-            myObject.setTarget("0".getBytes());
-            value = myObject.estimation();
-            if(Double.MAX_VALUE == value) { System.out.println("OK"); } else {System.out.println("WRONG"); }
-        }
-        catch(Exception e) {
-            System.out.println("Exception occurred: STOP");
-        }
     }
 }	    
 	    
